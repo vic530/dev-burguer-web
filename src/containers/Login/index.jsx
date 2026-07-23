@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,9 +15,11 @@ import {
   Title,
   Form,
   InputContainer,
+  Link,
 } from './style';
 
 export const Login = () => {
+  const navigate = useNavigate();
   const schema = yup
     .object({
       email: yup
@@ -40,19 +43,28 @@ export const Login = () => {
   console.log(errors);
 
   const onSubmit = async (data) => {
-    const response = await toast.promise(
+    const {
+      data: { token },
+    } = await toast.promise(
       api.post('/session', {
         email: data.email,
         password: data.password,
       }),
       {
         pending: 'Verificando seus dados',
-        success: 'Seja Bem-vindo(a) 👌',
-        error: 'Email ou Senha Incorretos 🤯',
+        success: {
+          render() {
+            setTimeout(() => {
+              navigate('/');
+            }, 2000);
+            return `Seja Bem-vindo(a) 👌`;
+          },
+          error: 'Email ou Senha Incorretos 🤯',
+        },
       },
     );
 
-    console.log(response);
+    localStorage.setItem('token', token);
   };
 
   return (
@@ -80,7 +92,7 @@ export const Login = () => {
           <Button type="submit">Entra</Button>
         </Form>
         <p>
-          Não possui conta? <a>Cadastre-se.</a>
+          Não possui conta? <Link to={'/cadastro'}>Cadastre-se.</Link>
         </p>
       </RightContainer>
     </LoginContainer>

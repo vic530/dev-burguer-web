@@ -1,3 +1,4 @@
+import { Link as ReactLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import BacgroundLogo from '../../assets/background-login.jpg';
@@ -21,7 +22,7 @@ export const LeftContainer = styled.div`
   align-items: center;
 
   img {
-    width: 80%;
+    width: 65%;
   }
 `;
 export const RightContainer = styled.div`
@@ -89,4 +90,9 @@ export const InputContainer = styled.div`
     color: #cf3057;
     height: 10px;
   }
+`;
+
+export const Link = styled(ReactLink)`
+  text-decoration: none;
+  color: #fff;
 `;
