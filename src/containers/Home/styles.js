@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import BannerHome from '../../assets/banner-home.svg';
 import Background from '../../assets/background.svg';
+import BannerHome from '../../assets/banner-home.svg';
 
 export const Banner = styled.div`
   background: url('${BannerHome}');
@@ -23,6 +23,8 @@ export const Container = styled.section`
     linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
     url('${Background}');
   background-size: cover;
-  height: 500px;
+  height: 100%;
 `;
-export const Content = styled.div``;
+export const Content = styled.div`
+  padding-bottom: 70px;
+`;
