@@ -10,6 +10,11 @@ export const Container = styled.div`
     overflow: visible;
   }
 
+  .react-multiple-carousel__arrow--left {
+    left: calc(4% + 1px);
+    left: 10px;
+  }
+
   padding-left: 40px;
   padding-bottom: 40px;
 `;
