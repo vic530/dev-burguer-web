@@ -25,6 +25,3 @@ export const Container = styled.section`
   background-size: cover;
   height: 100%;
 `;
-export const Content = styled.div`
-  padding-bottom: 70px;
-`;
