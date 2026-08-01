@@ -5,6 +5,17 @@ export const Container = styled.div`
     padding-right: 40px;
   }
 
+  .react-multiple-carousel__arrow--left {
+    left: calc(4% + 1px);
+    left: 10px;
+    top: 10px;
+  }
+
+  .react-multiple-carousel__arrow--right {
+    right: calc(4% + 1px);
+    top: 10px;
+  }
+
   padding-left: 40px;
 `;
 
