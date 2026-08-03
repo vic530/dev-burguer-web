@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { CardProduct } from '../../components/CardProduct';
 import { api } from '../../services/api';
@@ -14,6 +15,10 @@ import {
 export const Menu = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredCategory] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadCategories() {
@@ -39,6 +44,17 @@ export const Menu = () => {
     loadProducts();
   }, []);
 
+  useEffect(() => {
+    if (activeCategory === 0) {
+      setFilteredCategory(products);
+    } else {
+      const newFilteredProducts = products.filter(
+        (product) => product.category_id === activeCategory,
+      );
+      setFilteredCategory(newFilteredProducts);
+    }
+  }, [products, activeCategory]);
+
   return (
     <Container>
       <Banner>
@@ -53,11 +69,28 @@ export const Menu = () => {
       </Banner>
       <CategorysMenu>
         {categories.map((category) => (
-          <CategorysButtons key={category.id}>{category.name}</CategorysButtons>
+          <CategorysButtons
+            key={category.id}
+            $isActiveCategory={activeCategory === category.id}
+            onClick={() => {
+              navigate(
+                {
+                  pathname: '/cardapio',
+                  search: `?categoria=${category.id}`,
+                },
+                {
+                  replace: true,
+                },
+              );
+              setActiveCategory(category.id);
+            }}
+          >
+            {category.name}
+          </CategorysButtons>
         ))}
       </CategorysMenu>
       <ProductsContainer>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <CardProduct product={product} key={product.id} />
         ))}
       </ProductsContainer>
