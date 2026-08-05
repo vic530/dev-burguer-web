@@ -4,8 +4,6 @@ import { CartButton } from '../CartButton';
 import { CartImage, Container } from './styles';
 
 export const CardProduct = ({ product }) => {
-  console.log(product);
-
   return (
     <Container>
       <CartImage src={product.url} alt={product.name} />
