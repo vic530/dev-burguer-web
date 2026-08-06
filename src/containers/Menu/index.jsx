@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CardProduct } from '../../components/CardProduct';
@@ -10,12 +10,12 @@ import {
   CategorysMenu,
   ProductsContainer,
   CategorysButtons,
+  HomeButton,
 } from './styles';
 
 export const Menu = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredCategory] = useState([]);
 
   const navigate = useNavigate();
 
@@ -57,15 +57,11 @@ export const Menu = () => {
     loadProducts();
   }, []);
 
-  useEffect(() => {
+  const filteredProducts = useMemo(() => {
     if (activeCategory === 0) {
-      setFilteredCategory(products);
-    } else {
-      const newFilteredProducts = products.filter(
-        (product) => product.category_id === activeCategory,
-      );
-      setFilteredCategory(newFilteredProducts);
+      return products;
     }
+    return products.filter((product) => product.category_id === activeCategory);
   }, [products, activeCategory]);
 
   return (
@@ -107,6 +103,15 @@ export const Menu = () => {
           <CardProduct product={product} key={product.id} />
         ))}
       </ProductsContainer>
+      <HomeButton
+        onClick={() => {
+          navigate({
+            pathname: '/',
+          });
+        }}
+      >
+        <p>&lt; Voltar</p>
+      </HomeButton>
     </Container>
   );
 };
