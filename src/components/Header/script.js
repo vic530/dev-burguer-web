@@ -33,9 +33,17 @@ export const Navigation = styled.nav`
     justify-content: center;
     gap: 20px;
   }
+
+  hr {
+    width: 1px;
+    height: 25px;
+    border: 1px solid #625e5e;
+  }
 `;
 export const HeaderLike = styled(Link)`
-  color: #fff;
+  color: ${(props) => (props.$isActive ? '#9758a6 ' : '#fff')};
+  border-bottom: ${(props) => (props.$isActive ? '1px solid #9758a6' : 'none')};
+  padding-bottom: 5px;
   text-decoration: none;
   font-size: 14 px;
   font-weight: bold;

@@ -39,8 +39,6 @@ export const CategorysCarousel = () => {
     },
   };
 
-  console.log(Carousel);
-
   return (
     <Container>
       <Title>Categorias</Title>
