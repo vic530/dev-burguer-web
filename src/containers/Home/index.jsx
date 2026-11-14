@@ -1,6 +1,4 @@
-import { CategorysCarousel } from '../../components/CategorysCarousel';
-import { OffersCarousel } from '../../components/OffersCarousel';
-import { useUser } from '../../hooks/UserContext';
+import { CategorysCarousel, OffersCarousel } from '../../components';
 import { Banner, Container } from './styles';
 
 export const Home = () => {

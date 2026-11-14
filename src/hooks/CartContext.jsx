@@ -20,13 +20,16 @@ export const CartProvider = ({ children }) => {
     } else {
       product.quantity = 1;
       newCartProducts = [...cartProducts, product];
-      setCartProducts(newCartProducts);
     }
 
+    setCartProducts(newCartProducts);
     updateLocalStorage(newCartProducts);
   };
 
-  const clearCart = () => {};
+  const clearCart = () => {
+    setCartProducts([]);
+    updateLocalStorage([]);
+  };
 
   const deleteProduct = (productId) => {
     const newCart = cartProducts.filter((prd) => prd.id !== productId);
